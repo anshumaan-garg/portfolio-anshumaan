@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .experience-container {
+            min-height: 100vh;
+            padding: 8rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experience-card {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(127, 179, 250, 0.1);
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .experience-card:nth-child(1) { animation-delay: 0.2s; }
+        .experience-card:nth-child(2) { animation-delay: 0.4s; }
+        .experience-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .company-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid rgba(127, 179, 250, 0.1);
+            box-shadow: 0 0 10px rgba(127, 179, 250, 0.2);
+        }
+
+        .experience-details {
+            flex: 1;
+        }
+
+        .experience-details h3 {
+            color: var(--cloud-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-details ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: var(--text-gray);
+        }
+
+        .experience-details ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-highlights {
+            margin-top: 1rem;
+        }
+
+        .highlight {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Anshumaan Garg</div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="work-experience.html" class="active">Work Experience</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="experience-container">
+        <!-- AI Software Developer Experience Card -->
+        <div class="experience-card">
+            <img src="assets/images/logo.png" alt="Opkey Logo" class="company-logo">
+            <div class="experience-details">
+                <h3>AI Software Developer — Opkey, Noida</h3>
+                <p><strong>Duration:</strong> July 2024 – August 2025</p>
+                <div class="experience-highlights">
+                    <div class="highlight">
+                        <i class="fas fa-cogs"></i>
+                        <p>Built cost-effective and low-latency solutions for ERP automation, streamlining enterprise workflows through AI-driven automation and real-time performance optimization.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Designed and implemented a classifier-based architecture within multi-agent LLM workflows for ERP automation, resulting in a 40x reduction in token-related costs and a 75% overall decrease in processing expenses.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>Integrated streaming capabilities into LLM pipelines, achieving an 85% reduction in latency. This major update was pivotal for client demos and directly enhanced solution responsiveness.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-robot"></i>
+                        <p>Built an AI-powered automation pipeline to generate 4,000+ product descriptions, reducing several weeks of manual work to just a few days at a cost of only $1.25.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-microchip"></i>
+                        <p>Engineered fake streaming mechanisms within LLM workflows to simulate responses during development, leading to an approximately 82% reduction in latency and enhanced developer efficiency.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-cloud"></i>
+                        <p>Optimized LLMOps pipeline using cloud-based solutions for cost-effective, low-maintenance GPU hosting with scalable deployment templates.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>Fine-tuned BERT model for PII detection and classification with 95% accuracy.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-database"></i>
+                        <p>Architected and implemented a RAG-enabled backend AI architecture, reducing model size from 235B to 8B parameters and cutting operational costs by 95.83% while maintaining accuracy.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-brain"></i>
+                        <p>Engineered a multi-class few-shot orchestrator achieving 94% accuracy, capable of asking clarifying questions and dynamically assigning agents based on identified use cases.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-link"></i>
+                        <p>Implemented Chain-of-Thought reasoning for agent-based tool selection using sequential and dynamic I/O referencing, enabling accurate and context-aware responses to user queries.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-file-code"></i>
+                        <p>Developed an LLM-based summarizer that converts raw text into well-structured HTML pages, eliminating the need for customers to parse JSON or lengthy Excel files.</p>
+                    </div>
+                </div>
+                <p><strong>Technologies & Tools Used:</strong> Python, FastAPI, Flask, LangChain, LlamaIndex, Hugging Face Transformers, OpenAI API, Qdrant, Redis, Docker, LM-Studio, Postman, Ollama, Langfuse, BERT, RAG Architectures, Multi-Agent Systems</p>
+                <p><strong>Skills Learned:</strong> LLM Hosting on local Data Center and Cloud, Multi-Agent Orchestration, Cost Optimization, Latency Reduction, Team Leadership, Training New Recruits in AI Fundamentals</p>
+            </div>
+        </div>
+
+        <!-- AI Intern Experience Card -->
+        <div class="experience-card">
+            <img src="assets/images/logo.png" alt="Opkey Logo" class="company-logo">
+            <div class="experience-details">
+                <h3>AI Intern — Opkey, Noida</h3>
+                <p><strong>Duration:</strong> June 2023 – July 2024</p>
+                <div class="experience-highlights">
+                    <div class="highlight">
+                        <i class="fas fa-comments"></i>
+                        <p>Developed Generative AI-powered chatbot models capable of automatically generating test cases from natural language prompts, resulting in significant time and cost savings across QA workflows.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-tags"></i>
+                        <p>Integrated test case mining techniques and implemented JSON-based tagging across diverse testing domains, including generic QA and Oracle Fusion environments.</p>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-wrench"></i>
+                        <p>Utilized OpenAI fine-tuning to tailor model performance and implemented prompt-driven CRUD operations for SaaS-based test case creation, management, and optimization.</p>
+                    </div>
+                </div>
+                <p><strong>Technologies & Tools Used:</strong> Python, OpenAI API, JSON Processing, Natural Language Processing, Generative AI, Test Automation, Oracle Fusion, SaaS Development</p>
+                <p><strong>Skills Learned:</strong> Generative AI Development, Test Case Automation, OpenAI Fine-tuning, CRUD Operations, QA Workflow Optimization</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

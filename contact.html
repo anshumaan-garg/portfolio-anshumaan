@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - Anshumaan Garg</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --soft-blue: #7fb3fa;
+            --bright-blue: #00ffff;
+            --cloud-white: #ffffff;
+            --dark-bg: #121212;
+            --card-bg: rgba(18, 18, 18, 0.9);
+            --border-color: rgba(127, 179, 250, 0.1);
+            --glow-color: rgba(0, 255, 255, 0.1);
+            --success-green: #00ff88;
+            --gradient-primary: linear-gradient(120deg, var(--soft-blue) 0%, var(--bright-blue) 50%, var(--soft-blue) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: var(--cloud-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--cloud-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--soft-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cloud-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Particle Background */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--soft-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--soft-blue), transparent);
+            opacity: 0.2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.4; }
+        }
+
+        .contact-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .status-bar {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px var(--glow-color);
+            text-align: center;
+            animation: slideDown 0.6s ease forwards;
+        }
+
+        .availability-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--success-green);
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--glow-color);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: var(--gradient-primary);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px) rotateX(2deg);
+            box-shadow: 0 12px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: gradientFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(20deg); }
+        }
+
+        .cta-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            animation: fadeIn 0.6s ease 0.3s both;
+        }
+
+        .primary-cta {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInLeft 0.6s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.2s; }
+        .contact-item:nth-child(2) { animation-delay: 0.4s; }
+        .contact-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--cloud-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(127, 179, 250, 0.05);
+            border: 1px solid rgba(127, 179, 250, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(127, 179, 250, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            color: var(--soft-blue);
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--soft-blue);
+            box-shadow: 0 5px 20px rgba(127, 179, 250, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .contact-link:hover .contact-icon {
+            transform: rotate(360deg) scale(1.2);
+            color: var(--bright-blue);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--cloud-white);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .contact-link:hover .copy-btn {
+            opacity: 1;
+        }
+
+        .copy-btn:hover {
+            background: rgba(127, 179, 250, 0.2);
+            color: var(--soft-blue);
+        }
+
+        /* Quick Contact Form */
+        .quick-form {
+            margin-top: 2rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .quick-form.active {
+            opacity: 1;
+            max-height: 400px;
+        }
+
+        .form-toggle {
+            position: relative;
+            z-index: 999 !important;
+            pointer-events: auto !important;
+        }
+
+        .form-toggle {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+        }
+
+        .form-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(127, 179, 250, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--cloud-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--soft-blue);
+            box-shadow: 0 0 10px rgba(127, 179, 250, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            background: var(--success-green);
+            color: var(--dark-bg);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .contact-card {
+                padding: 2rem;
+            }
+            
+            .contact-heading {
+                font-size: 2rem;
+            }
+            
+            .contact-link {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .contact-link:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(127, 179, 250, 0.3);
+            border-top: 3px solid var(--soft-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Additional Status Info */
+        .status-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .time-display {
+            font-family: monospace;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particle-container" id="particleContainer"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Anshumaan Garg</div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="work-experience.html">Work Experience</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="research.html" class="active">Research</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check"></i> Copied to clipboard!
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-wrapper">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="availability-status">
+                    <div class="status-dot"></div>
+                    <span>Available for opportunities</span>
+                </div>
+                <div class="status-info">
+                    <div class="status-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Usually responds within 24 hours</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Delhi, India</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-globe"></i>
+                        <span class="time-display" id="localTime">IST</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Contact Card -->
+            <div class="contact-card">
+                <h1 class="contact-heading">Let's Connect!</h1>
+                <p class="cta-text primary-cta">Looking to create something meaningful? I'm just a message away.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <a href="mailto:anshumaan.garg001@gmail.com" class="contact-link" data-copy="anshumaan.garg001@gmail.com">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value">anshumaan.garg001@gmail.com</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard(this)" data-text="anshumaan.garg001@gmail.com">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="contact-item">
+                        <a href="https://github.com/anshumaan-garg" target="_blank" class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-label">GitHub</span>
+                                <span class="contact-value">anshumaan-garg</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard(this)" data-text="https://github.com/anshumaan-garg">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="contact-item">
+                        <a href="https://www.linkedin.com/in/anshumaan-garg-1a06bb1ba/" target="_blank" class="contact-link">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-label">LinkedIn</span>
+                                <span class="contact-value">anshumaan-garg</span>
+                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard(this)" data-text="https://www.linkedin.com/in/anshumaan-garg-1a06bb1ba/">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="https://forms.gle/1K8RU6tyJzD4KDFBA" target="_blank" class="form-toggle">
+                    <i class="fas fa-lightbulb"></i> Share Your Vision
+                </a>
+                
+                <!-- Quick Contact Form - REMOVED -->
+                <!-- 
+                <div class="quick-form" id="quickForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button class="submit-btn" onclick="submitForm()">
+                        <i class="fas fa-rocket"></i> Send Message
+                    </button>
+                </div>
+                -->
+                            </div>  <!-- contact-card closing -->
+                        </div>      <!-- contact-wrapper closing -->
+                    </div>          <!-- contact-container closing -->
+
+    <script>
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Remove loading overlay after everything is loaded
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 1500);
+        });
+
+        // Particle System
+        function initParticles() {
+            const container = document.getElementById('particleContainer');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                createParticle(container);
+            }
+            
+            // Create constellation lines
+            createConstellationLines(container);
+        }
+
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            
+            container.appendChild(particle);
+        }
+
+        function createConstellationLines(container) {
+            for (let i = 0; i < 10; i++) {
+                const line = document.createElement('div');
+                line.className = 'constellation-line';
+                line.style.left = Math.random() * 100 + '%';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.width = (Math.random() * 200 + 100) + 'px';
+                line.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                line.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(line);
+            }
+        }
+
+        // Mouse interaction with particles
+        document.addEventListener('mousemove', function(e) {
+            const particles = document.querySelectorAll('.particle');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            particles.forEach(particle => {
+                const rect = particle.getBoundingClientRect();
+                const particleX = (rect.left + rect.width / 2) / window.innerWidth;
+                const particleY = (rect.top + rect.height / 2) / window.innerHeight;
+                
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - particleX, 2) + Math.pow(mouseY - particleY, 2)
+                );
+                
+                if (distance < 0.1) {
+                    particle.style.transform = 'scale(1.5)';
+                    particle.style.opacity = '1';
+                } else {
+                    particle.style.transform = 'scale(1)';
+                    particle.style.opacity = '0.5';
+                }
+            });
+        });
+
+        // Time Display
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                timeZone: 'Asia/Kolkata',
+                hour12: true,
+                hour: 'numeric',
+                minute: '2-digit'
+            });
+            document.getElementById('localTime').textContent = timeString + ' IST';
+        }
+
+        // Copy to Clipboard
+        function copyToClipboard(button) {
+            const text = button.getAttribute('data-text');
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+                
+                // Visual feedback
+                const icon = button.querySelector('i');
+                icon.className = 'fas fa-check';
+                setTimeout(() => {
+                    icon.className = 'fas fa-copy';
+                }, 2000);
+            });
+        }
+
+        // Toast Notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Quick Form Toggle
+        function toggleQuickForm() {
+            const form = document.getElementById('quickForm');
+            const button = document.querySelector('.form-toggle');
+            
+            form.classList.toggle('active');
+            
+            if (form.classList.contains('active')) {
+                button.innerHTML = '<i class="fas fa-times"></i> Close Form';
+            } else {
+                button.innerHTML = '<i class="fas fa-paper-plane"></i> Send Quick Message';
+            }
+        }
+
+        // Form Submission
+        function submitForm() {
+            const form = document.getElementById('quickForm');
+            const inputs = form.querySelectorAll('input, textarea');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#ff6b6b';
+                } else {
+                    input.style.borderColor = 'var(--border-color)';
+                }
+            });
+            
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = document.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        toggleQuickForm();
+                        form.reset();
+                        showToast();
+                    }, 2000);
+                }, 2000);
+            }
+        }
+
+        // Ripple Effect on Contact Cards
+        document.querySelectorAll('.contact-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'I') return;
+                
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(127, 179, 250, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'rippleEffect 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple effect keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            const focusableElements = document.querySelectorAll(
+                'a, button, input, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const focusedIndex = Array.from(focusableElements).indexOf(document.activeElement);
+            
+            if (e.key === 'Tab') {
+                // Custom tab navigation with visual feedback
+                const nextIndex = e.shiftKey ? focusedIndex - 1 : focusedIndex + 1;
+                const nextElement = focusableElements[nextIndex];
+                
+                if (nextElement) {
+                    nextElement.focus();
+                    e.preventDefault();
+                }
+            }
+            
+            if (e.key === 'Enter' && document.activeElement.classList.contains('contact-link')) {
+                // Trigger click for contact links
+                document.activeElement.click();
+            }
+            
+            if (e.key === 'Escape') {
+                // Close quick form if open
+                const form = document.getElementById('quickForm');
+                if (form.classList.contains('active')) {
+                    toggleQuickForm();
+                }
+            }
+        });
+
+        // Enhanced focus styles
+        const focusStyle = document.createElement('style');
+        focusStyle.textContent = `
+            *:focus {
+                outline: 2px solid var(--soft-blue);
+                outline-offset: 2px;
+            }
+            
+            .contact-link:focus {
+                transform: translateX(5px);
+                border-color: var(--soft-blue);
+                box-shadow: 0 0 20px rgba(127, 179, 250, 0.4);
+            }
+        `;
+        document.head.appendChild(focusStyle);
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all contact items for scroll animations
+        document.querySelectorAll('.contact-item, .status-bar').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Performance optimization: Throttle scroll events
+        let ticking = false;
+        
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.particle');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index % 3) * 0.2;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Mobile touch interactions
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.contact-card').forEach(card => {
+                card.addEventListener('touchstart', function(e) {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                card.addEventListener('touchend', function(e) {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Haptic feedback for mobile (if supported)
+        function triggerHaptic() {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(50);
+            }
+        }
+
+        // Add haptic feedback to buttons
+        document.querySelectorAll('button, .contact-link').forEach(element => {
+            element.addEventListener('click', triggerHaptic);
+        });
+
+        // Email template generation
+        function generateEmailLink(type = 'general') {
+            const templates = {
+                general: {
+                    subject: 'Hello from your portfolio visitor!',
+                    body: 'Hi Anshumaan,\n\nI came across your portfolio and would love to connect.\n\nBest regards,'
+                },
+                project: {
+                    subject: 'Project Collaboration Opportunity',
+                    body: 'Hi Anshumaan,\n\nI have a project idea and would like to discuss potential collaboration.\n\nBest regards,'
+                },
+                job: {
+                    subject: 'Job Opportunity',
+                    body: 'Hi Anshumaan,\n\nWe have an exciting opportunity that might interest you.\n\nBest regards,'
+                }
+            };
+            
+            const template = templates[type];
+            return `mailto:anshumaan.garg001@gmail.com?subject=${encodeURIComponent(template.subject)}&body=${encodeURIComponent(template.body)}`;
+        }
+
+        // Add context menu for email templates
+        document.querySelector('[data-copy="anshumaan.garg001@gmail.com"]').addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showEmailTemplateMenu(e.clientX, e.clientY);
+        });
+
+        function showEmailTemplateMenu(x, y) {
+            // Remove existing menu if any
+            const existingMenu = document.querySelector('.email-menu');
+            if (existingMenu) existingMenu.remove();
+            
+            const menu = document.createElement('div');
+            menu.className = 'email-menu';
+            menu.style.cssText = `
+                position: fixed;
+                top: ${y}px;
+                left: ${x}px;
+                background: var(--card-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 0.5rem;
+                z-index: 1002;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            `;
+            
+            const templates = [
+                { name: 'General Inquiry', type: 'general' },
+                { name: 'Project Collaboration', type: 'project' },
+                { name: 'Job Opportunity', type: 'job' }
+            ];
+            
+            templates.forEach(template => {
+                const item = document.createElement('div');
+                item.style.cssText = `
+                    padding: 0.5rem 1rem;
+                    cursor: pointer;
+                    transition: background 0.2s ease;
+                    border-radius: 4px;
+                `;
+                item.textContent = template.name;
+                
+                item.addEventListener('mouseover', () => {
+                    item.style.background = 'rgba(127, 179, 250, 0.1)';
+                });
+                
+                item.addEventListener('mouseout', () => {
+                    item.style.background = 'transparent';
+                });
+                
+                item.addEventListener('click', () => {
+                    window.location.href = generateEmailLink(template.type);
+                    menu.remove();
+                });
+                
+                menu.appendChild(item);
+            });
+            
+            document.body.appendChild(menu);
+            
+            // Remove menu when clicking outside
+            setTimeout(() => {
+                document.addEventListener('click', function removeMenu() {
+                    menu.remove();
+                    document.removeEventListener('click', removeMenu);
+                });
+            }, 100);
+        }
+
+        // Analytics tracking (placeholder for actual implementation)
+        function trackEvent(eventName, properties = {}) {
+            // Replace with actual analytics implementation
+            console.log('Event tracked:', eventName, properties);
+        }
+
+        // Track contact interactions
+        document.querySelectorAll('.contact-link').forEach((link, index) => {
+            link.addEventListener('click', () => {
+                const platform = link.querySelector('.contact-label').textContent;
+                trackEvent('contact_clicked', { platform, position: index });
+            });
+        });
+
+        // Track form interactions
+        document.querySelector('.form-toggle').addEventListener('click', () => {
+            trackEvent('quick_form_toggled');
+        });
+
+        // Service Worker registration for offline capability
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Add loading states for external links
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const icon = this.querySelector('.contact-icon i');
+                const originalClass = icon.className;
+                
+                icon.className = 'fas fa-spinner fa-spin';
+                
+                // Reset icon after a short delay
+                setTimeout(() => {
+                    icon.className = originalClass;
+                }, 1000);
+            });
+        });
+
+        // Preload hover states
+        function preloadHoverAssets() {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'style';
+            link.href = 'data:text/css,'; // Placeholder for hover state assets
+            document.head.appendChild(link);
+        }
+
+        // Initialize preloading
+        preloadHoverAssets();
+
+        // Add smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Connection status indicator
+        function updateConnectionStatus() {
+            const statusDot = document.querySelector('.status-dot');
+            if (navigator.onLine) {
+                statusDot.style.background = 'var(--success-green)';
+            } else {
+                statusDot.style.background = '#ff6b6b';
+            }
+        }
+
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        updateConnectionStatus();
+
+        // Error handling for form submission
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            showToast('error', 'Something went wrong. Please try again.');
+            event.preventDefault();
+        });
+
+        // Enhanced toast with types
+        function showToast(type = 'success', message = 'Copied to clipboard!') {
+            const toast = document.getElementById('toast');
+            const colors = {
+                success: 'var(--success-green)',
+                error: '#ff6b6b',
+                info: 'var(--soft-blue)'
+            };
+            
+            toast.style.background = colors[type];
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize everything
+        console.log('Contact page initialized successfully!');
+    </script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

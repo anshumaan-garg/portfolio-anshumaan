@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .resume-container {
+            min-height: 100vh;
+            padding: 8rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            padding: 3px;
+            background: linear-gradient(
+                45deg,
+                var(--soft-blue),
+                var(--bright-blue),
+                var(--soft-blue)
+            );
+        }
+
+        .glow-border {
+            position: absolute;
+            inset: -20px;
+            background: linear-gradient(
+                45deg,
+                rgba(127, 179, 250, 0.2),
+                rgba(0, 255, 255, 0.2),
+                rgba(127, 179, 250, 0.2)
+            );
+            filter: blur(25px);
+            animation: borderGlow 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                opacity: 0.5;
+                filter: blur(25px) brightness(0.8);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(25px) brightness(1.2);
+            }
+        }
+
+        .resume-gallery {
+            width: 100%;
+            padding: 2rem;
+            background: var(--darker-bg);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-slides {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .resume-page {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            filter: brightness(0.85) contrast(0.95);
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Navigation Controls */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--cloud-white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-nav:hover {
+            background: rgba(127, 179, 250, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: 10px;
+        }
+
+        .gallery-nav.next {
+            right: 10px;
+        }
+
+        /* Page Indicators */
+        .gallery-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(127, 179, 250, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: var(--soft-blue);
+            transform: scale(1.2);
+            border-color: var(--bright-blue);
+            box-shadow: 0 0 10px rgba(127, 179, 250, 0.5);
+        }
+
+        .dot:hover {
+            background: rgba(127, 179, 250, 0.6);
+            transform: scale(1.1);
+        }
+
+        .page-counter {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-left: 1rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Touch-friendly improvements */
+        .gallery-nav {
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .dot {
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dot::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: inherit;
+            border: inherit;
+        }
+
+        /* Download button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(
+                45deg,
+                var(--soft-blue),
+                var(--bright-blue)
+            );
+            color: var(--cloud-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: transform 0.3s ease;
+            min-height: 44px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            .resume-container {
+                padding: 5rem 1rem 1rem;
+            }
+            
+            .pdf-container {
+                margin: 1rem auto;
+            }
+
+            .resume-gallery {
+                padding: 1rem;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .gallery-nav.prev {
+                left: 5px;
+            }
+
+            .gallery-nav.next {
+                right: 5px;
+            }
+
+            .gallery-indicators {
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .page-counter {
+                margin-left: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .glow-border {
+                inset: -10px;
+                filter: blur(15px);
+            }
+        }
+
+        /* Small phones */
+        @media screen and (max-width: 480px) {
+            .resume-gallery {
+                padding: 0.5rem;
+            }
+
+            .gallery-indicators {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .page-counter {
+                margin-left: 0;
+            }
+
+            .glow-border {
+                inset: -8px;
+            }
+        }
+
+        /* Swipe gesture support */
+        .gallery-slides {
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .gallery-container {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Anshumaan Garg</div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="work-experience.html">Work Experience</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="resume.html" class="active">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="resume-container">
+        <div class="pdf-container">
+            <div class="glow-border"></div>
+            <div class="resume-gallery">
+                <div class="gallery-container">
+                    <div class="gallery-slides" id="gallerySlides">
+                        <div class="gallery-slide">
+                            <img src="assets/images/page_one.jpg" alt="Resume Page 1" class="resume-page">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/images/page_two.jpg" alt="Resume Page 2" class="resume-page">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/images/page_three.jpg" alt="Resume Page 3" class="resume-page">
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="gallery-nav prev" onclick="changeSlide(-1)" aria-label="Previous page">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav next" onclick="changeSlide(1)" aria-label="Next page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Page Indicators -->
+                <div class="gallery-indicators">
+                    <div class="page-dots">
+                        <span class="dot active" onclick="currentSlide(1)" aria-label="Go to page 1"></span>
+                        <span class="dot" onclick="currentSlide(2)" aria-label="Go to page 2"></span>
+                        <span class="dot" onclick="currentSlide(3)" aria-label="Go to page 3"></span>
+                    </div>
+                    <div class="page-counter" id="pageCounter">Page 1 of 3</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="assets/resume.pdf" download class="download-btn">
+            <i class="fas fa-download"></i>
+            Download Resume
+        </a>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.getElementById('gallerySlides');
+        const dots = document.querySelectorAll('.dot');
+        const pageCounter = document.getElementById('pageCounter');
+        const totalSlides = 3;
+
+        // Touch/swipe variables
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        function updateSlide() {
+            const translateX = -currentSlideIndex * 100;
+            slides.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+            
+            // Update page counter
+            pageCounter.textContent = `Page ${currentSlideIndex + 1} of ${totalSlides}`;
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            
+            updateSlide();
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            updateSlide();
+        }
+
+        // Touch/Swipe functionality
+        const galleryContainer = document.querySelector('.gallery-container');
+
+        // Touch start
+        galleryContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        // Touch move
+        galleryContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            currentX = e.touches[0].clientX;
+        });
+
+        // Touch end
+        galleryContainer.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const deltaX = startX - currentX;
+            const threshold = 50; // Minimum swipe distance
+            
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX > 0) {
+                    // Swiped left, go to next slide
+                    changeSlide(1);
+                } else {
+                    // Swiped right, go to previous slide
+                    changeSlide(-1);
+                }
+            }
+        });
+
+        // Mouse drag support for desktop
+        galleryContainer.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        galleryContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX;
+        });
+
+        galleryContainer.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const deltaX = startX - currentX;
+            const threshold = 50;
+            
+            if (Math.abs(deltaX) > threshold) {
+                if (deltaX > 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        });
+
+        // Prevent context menu on long press
+        galleryContainer.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

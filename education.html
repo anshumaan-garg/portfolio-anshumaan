@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Anshumaan Garg</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Education Timeline Styles */
+        .education-timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* Vertical line */
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #00d4ff, #0099cc);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline dot */
+        .timeline-dot {
+            position: absolute;
+            left: -49px;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background: #00d4ff;
+            border: 3px solid #1a1a1a;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-dot.current {
+            background: #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        /* Timeline content */
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #000;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .timeline-institution {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-institution i {
+            color: #00d4ff;
+        }
+
+        .timeline-gpa {
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .timeline-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-tag {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .timeline-achievements {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        .achievements-title {
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements-list li {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .achievements-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-size: 0.8rem;
+        }
+
+        /* Future Plans Section */
+        .future-plans {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .future-plan-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 153, 204, 0.1));
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+        }
+
+        .plan-icon {
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .plan-title {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .plan-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .plan-timeline {
+            color: #00ff88;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .education-timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-dot {
+                left: 7px;
+            }
+
+            .timeline-content {
+                padding: 20px;
+            }
+
+            .timeline-title {
+                font-size: 1.2rem;
+            }
+
+            .timeline-highlights {
+                gap: 5px;
+            }
+
+            .highlight-tag {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Anshumaan Garg</div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="work-experience.html">Work Experience</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="research.html" class="active">Research</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Education Hero Section -->
+    <header class="page-hero">
+        <div class="hero-content">
+            <h1 class="page-title typing-animation">Education Timeline</h1>
+            <p class="page-subtitle typing-animation delay-1">Academic Journey & Continuous Learning</p>
+        </div>
+    </header>
+
+    <!-- Education Timeline Section -->
+    <section class="education-main">
+        <div class="container">
+            <div class="education-timeline">
+                
+                <!-- Current Education -->
+                <div class="timeline-item">
+                    <div class="timeline-dot current"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Sept 2025 - Present</div>
+                        <h3 class="timeline-title">Post Graduate Program in Artificial Intelligence and Machine Learning</h3>
+                        <div class="timeline-institution">
+                            <i class="fas fa-university"></i>
+                            The University of Texas at Austin (in collaboration with Great Learning)
+                        </div>
+                        <p class="timeline-description">
+                            Advanced program focusing on cutting-edge AI/ML technologies, LLM applications, and industry-ready skills. Awarded Meritorious Scholarship based on academic and professional profile.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span class="highlight-tag">Probability & Statistics</span>
+                            <span class="highlight-tag">Linear Algebra for ML</span>
+                            <span class="highlight-tag">Machine Learning</span>
+                            <span class="highlight-tag">Deep Learning</span>
+                            <span class="highlight-tag">Natural Language Processing</span>
+                            <span class="highlight-tag">Computer Vision</span>
+                            <span class="highlight-tag">Reinforcement Learning</span>
+                        </div>
+                        <div class="timeline-achievements">
+                            <h4 class="achievements-title">
+                                <i class="fas fa-trophy"></i>
+                                Key Achievements
+                            </h4>
+                            <ul class="achievements-list">
+                                <li>Meritorious Scholarship recipient for academic and professional excellence</li>
+                                <li>Specializing in advanced AI agent development and LLM integration</li>
+                                <li>Focus on practical applications in enterprise automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bachelor's Degree -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Sept 2020 - Aug 2024</div>
+                        <h3 class="timeline-title">Bachelor of Technology in Computer Science and Engineering</h3>
+                        <div class="timeline-institution">
+                            <i class="fas fa-university"></i>
+                            Amity University
+                        </div>
+                        <div class="timeline-gpa">
+                            <i class="fas fa-star"></i>
+                            GPA: 8.62/10
+                        </div>
+                        <p class="timeline-description">
+                            Comprehensive computer science education with strong foundation in algorithms, software engineering, and emerging technologies. Awarded Meritorious Scholarship for academic excellence.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span class="highlight-tag">Theory of Computation</span>
+                            <span class="highlight-tag">Data Structures</span>
+                            <span class="highlight-tag">Artificial Intelligence</span>
+                            <span class="highlight-tag">Databases</span>
+                            <span class="highlight-tag">Software Project Management</span>
+                            <span class="highlight-tag">Software Testing</span>
+                        </div>
+                        <div class="timeline-achievements">
+                            <h4 class="achievements-title">
+                                <i class="fas fa-trophy"></i>
+                                Key Achievements
+                            </h4>
+                            <ul class="achievements-list">
+                                <li>Meritorious Scholarship for academic excellence</li>
+                                <li>Strong foundation in computer science fundamentals</li>
+                                <li>Early exposure to AI and machine learning concepts</li>
+                                <li>Developed multiple software projects and applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class XII -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Apr 2018 - Mar 2020</div>
+                        <h3 class="timeline-title">Class XII - PCM with Computer Science</h3>
+                        <div class="timeline-institution">
+                            <i class="fas fa-school"></i>
+                            Jaspal Kaur Public School, CBSE Board
+                        </div>
+                        <div class="timeline-gpa">
+                            <i class="fas fa-percentage"></i>
+                            92.6%
+                        </div>
+                        <p class="timeline-description">
+                            Strong academic performance in science and mathematics with early introduction to computer programming.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span class="highlight-tag">Mathematics</span>
+                            <span class="highlight-tag">Physics</span>
+                            <span class="highlight-tag">Chemistry</span>
+                            <span class="highlight-tag">Computer Science (C Programming)</span>
+                            <span class="highlight-tag">English</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class X -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Mar 2017 - Mar 2018</div>
+                        <h3 class="timeline-title">Class X</h3>
+                        <div class="timeline-institution">
+                            <i class="fas fa-school"></i>
+                            Jaspal Kaur Public School, CBSE Board
+                        </div>
+                        <div class="timeline-gpa">
+                            <i class="fas fa-percentage"></i>
+                            96%
+                        </div>
+                        <p class="timeline-description">
+                            Excellent academic foundation across core subjects with outstanding performance.
+                        </p>
+                        <div class="timeline-highlights">
+                            <span class="highlight-tag">Mathematics</span>
+                            <span class="highlight-tag">Science</span>
+                            <span class="highlight-tag">Social Science</span>
+                            <span class="highlight-tag">English</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Academic Goals -->
+            <div class="future-plans">
+                <h2 style="color: #00d4ff; font-size: 2rem; margin-bottom: 30px;">Future Academic Goals</h2>
+                <div class="future-plan-card">
+                    <div class="plan-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="plan-title">Master's in AI (CDSO) - University of Texas at Austin</h3>
+                    <p class="plan-description">
+                        Planning to pursue MS in AI (CDSO) at UT Austin after completing the current PGP-AIML program. This advanced degree will focus on cutting-edge AI research and applications in computational data science.
+                    </p>
+                    <div class="plan-timeline">
+                        <i class="fas fa-calendar"></i>
+                        Target: 2026-2027
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <!-- <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="work-experience.html">Work Experience</a>
+                <a href="education.html">Education</a>
+                <a href="research.html">Research</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div> -->
+            <div class="social-links">
+                <a href="https://github.com/anshumaan-garg" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/anshumaan-garg-1a06bb1ba/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:anshumaan.garg001@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Anshumaan Garg. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

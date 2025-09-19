@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .resume-container {
+            min-height: 100vh;
+            padding: 8rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            padding: 3px; /* Added padding for gradient border */
+            background: linear-gradient(
+                45deg,
+                var(--soft-blue),
+                var(--bright-blue),
+                var(--soft-blue)
+            );
+        }
+
+        .glow-border {
+            position: absolute;
+            inset: -20px; /* Increased for wider glow */
+            background: linear-gradient(
+                45deg,
+                rgba(127, 179, 250, 0.2),
+                rgba(0, 255, 255, 0.2),
+                rgba(127, 179, 250, 0.2)
+            );
+            filter: blur(25px); /* Increased blur for softer glow */
+            animation: borderGlow 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                opacity: 0.5;
+                filter: blur(25px) brightness(0.8);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(25px) brightness(1.2);
+            }
+        }
+
+        .resume-images {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--darker-bg);
+            border-radius: 8px;
+        }
+
+        .resume-page {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            filter: brightness(0.85) contrast(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .resume-page:hover {
+            transform: scale(1.02);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(
+                45deg,
+                var(--soft-blue),
+                var(--bright-blue)
+            );
+            color: var(--cloud-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            .resume-container {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .pdf-container {
+                margin: 1rem auto;
+                width: 100%;
+                height: auto;
+            }
+
+            .resume-images {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .resume-page {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .glow-border {
+                inset: -10px;
+            }
+
+            .download-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Small phones */
+        @media screen and (max-width: 480px) {
+            .pdf-container {
+                height: auto;
+            }
+
+            .resume-images {
+                padding: 0.5rem;
+            }
+
+            .resume-page {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .glow-border {
+                inset: -8px;
+                filter: blur(15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">Aayushmaan Garg</div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="work-experience.html">Work Experience</a></li>
+            <li><a href="resume.html" class="active">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Flowing Clouds Background -->
+
+    <div class="resume-container">
+        <div class="pdf-container">
+            <div class="glow-border"></div>
+            <div class="resume-images">
+                <img src="assets/images/resume.jpg" alt="Resume Page" class="resume-page">
+            </div>
+        </div>
+        <a href="assets/resume.pdf" download class="download-btn">
+            <i class="fas fa-download"></i>
+            Download Resume
+        </a>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
