@@ -314,13 +314,22 @@
                 <div class="gallery-container">
                     <div class="gallery-slides" id="gallerySlides">
                         <div class="gallery-slide">
-                            <img src="assets/images/page_one.jpg" alt="Resume Page 1" class="resume-page">
+                            <img src="assets/images/Anshumaan_CV_page_1.jpg" alt="Resume Page 1" class="resume-page">
                         </div>
                         <div class="gallery-slide">
-                            <img src="assets/images/page_two.jpg" alt="Resume Page 2" class="resume-page">
+                            <img src="assets/images/Anshumaan_CV_page_2.jpg" alt="Resume Page 2" class="resume-page">
                         </div>
                         <div class="gallery-slide">
-                            <img src="assets/images/page_three.jpg" alt="Resume Page 3" class="resume-page">
+                            <img src="assets/images/Anshumaan_CV_page_3.jpg" alt="Resume Page 3" class="resume-page">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/images/Anshumaan_CV_page_4.jpg" alt="Resume Page 4" class="resume-page">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/images/Anshumaan_CV_page_5.jpg" alt="Resume Page 5" class="resume-page">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/images/Anshumaan_CV_page_6.jpg" alt="Resume Page 6" class="resume-page">
                         </div>
                     </div>
                     
@@ -339,8 +348,11 @@
                         <span class="dot active" onclick="currentSlide(1)" aria-label="Go to page 1"></span>
                         <span class="dot" onclick="currentSlide(2)" aria-label="Go to page 2"></span>
                         <span class="dot" onclick="currentSlide(3)" aria-label="Go to page 3"></span>
+                        <span class="dot" onclick="currentSlide(4)" aria-label="Go to page 4"></span>
+                        <span class="dot" onclick="currentSlide(5)" aria-label="Go to page 5"></span>
+                        <span class="dot" onclick="currentSlide(6)" aria-label="Go to page 6"></span>
                     </div>
-                    <div class="page-counter" id="pageCounter">Page 1 of 3</div>
+                    <div class="page-counter" id="pageCounter">Page 1 of 6</div>
                 </div>
             </div>
         </div>
@@ -356,7 +368,7 @@
         const slides = document.getElementById('gallerySlides');
         const dots = document.querySelectorAll('.dot');
         const pageCounter = document.getElementById('pageCounter');
-        const totalSlides = 3;
+        const totalSlides = 6;
 
         // Touch/swipe variables
         let startX = 0;
